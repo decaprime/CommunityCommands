@@ -11,7 +11,7 @@
   </PropertyGroup>
     <!-- Copy CommunityCommands.dll to /dist -->
   <Target Name="Thunderstore Copy to Dist" AfterTargets="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
-    <Copy SourceFiles="$(OutDir)\CommunityCommands.dll" DestinationFolder="$(SolutionDir)/dist" />
+    <Copy SourceFiles="$(OutDir)\CommunityCommands.dll" DestinationFolder="$(ProjectDir)/dist" />
   </Target>
   <ItemGroup>
     <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be*" IncludeAssets="compile" />
