@@ -7,10 +7,12 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <RootNamespace>CommunityCommands</RootNamespace>
-    <AssemblyVersion>0.1.2.0</AssemblyVersion>
-    <FileVersion>0.1.2.0</FileVersion>
-    <InformationalVersion>0.1.2+1.Branch.main.Sha.0ebb91813adfb4ba5521a67b7c542ef956a5a62c</InformationalVersion>
+    <Authors>deca</Authors>
   </PropertyGroup>
+    <!-- Copy CommunityCommands.dll to /dist -->
+  <Target Name="Thunderstore Copy to Dist" AfterTargets="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
+    <Copy SourceFiles="$(OutDir)\CommunityCommands.dll" DestinationFolder="$(SolutionDir)/dist" />
+  </Target>
   <ItemGroup>
     <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be*" IncludeAssets="compile" />
     <PackageReference Include="BepInEx.Core" Version="6.0.0-be*" IncludeAssets="compile" />
