@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>CommunityCommands</AssemblyName>
+    <Description>Generic Server Commands for running communities by the community.</Description>
+    <Version>0.1.2</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>CommunityCommands</RootNamespace>
+    <AssemblyVersion>0.1.2.0</AssemblyVersion>
+    <FileVersion>0.1.2.0</FileVersion>
+    <InformationalVersion>0.1.2+1.Branch.main.Sha.0ebb91813adfb4ba5521a67b7c542ef956a5a62c</InformationalVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be*" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.Core" Version="6.0.0-be*" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+    <PackageReference Include="VRising.Unhollowed.Client" Version="0.6.0.571080001" />
+    <PackageReference Include="VRising.VampireCommandFramework" Version="[0.5.2,)" />
+  </ItemGroup>
+</Project>
