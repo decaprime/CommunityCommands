@@ -18,7 +18,7 @@ internal static class BloodCommands
 		Worker = -540707191
 	}
 
-	[Command("bloodpotion", description: "Creates a Potion with specified Blood Type, Quality and Value")]
+	[Command("bloodpotion", "bp", description: "Creates a Potion with specified Blood Type, Quality and Value")]
 	public static void GiveBloodPotionCommand(ChatCommandContext ctx, BloodType type = BloodType.Frailed, float quality = 100f)
 	{
 		quality = Mathf.Clamp(quality, 0, 100);
