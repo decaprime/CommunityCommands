@@ -21,10 +21,11 @@ internal static class BloodCommands
 	[Command("bloodpotion", "bp", description: "Creates a Potion with specified Blood Type, Quality and Value", adminOnly: true)]
 	public static void GiveBloodPotionCommand(ChatCommandContext ctx, BloodType type = BloodType.Frailed, float quality = 100f)
 	{
+		var bloodPotionRecipeId = 1223264867;
 		quality = Mathf.Clamp(quality, 0, 100);
 		var em = Helper.Server.EntityManager;
 
-		Entity entity = Helper.AddItemToInventory(ctx.Event.SenderCharacterEntity, new PrefabGUID(828432508), 1);
+		Entity entity = Helper.AddItemToInventory(ctx.Event.SenderCharacterEntity, new PrefabGUID(bloodPotionRecipeId), 1);
 
 		var blood = new StoredBlood()
 		{
