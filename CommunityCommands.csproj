@@ -1,23 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>CommunityCommands</AssemblyName>
-    <Description>Generic Server Commands for running communities by the community.</Description>
-    <Version>0.1.2</Version>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>latest</LangVersion>
-    <RootNamespace>CommunityCommands</RootNamespace>
-    <Authors>deca</Authors>
-  </PropertyGroup>
-    <!-- Copy CommunityCommands.dll to /dist -->
-  <Target Name="Thunderstore Copy to Dist" AfterTargets="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
-    <Copy SourceFiles="$(OutDir)\CommunityCommands.dll" DestinationFolder="$(ProjectDir)/dist" />
-  </Target>
-  <ItemGroup>
-    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be*" IncludeAssets="compile" />
-    <PackageReference Include="BepInEx.Core" Version="6.0.0-be*" IncludeAssets="compile" />
-    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
-    <PackageReference Include="VRising.Unhollowed.Client" Version="0.6.1.*" />
-    <PackageReference Include="VRising.VampireCommandFramework" Version="[0.5.3,)" />
-  </ItemGroup>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>CommunityCommands</AssemblyName>
+		<Description>Generic Server Commands for running communities by the community.</Description>
+		<Version>0.1.2</Version>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<LangVersion>latest</LangVersion>
+		<RootNamespace>CommunityCommands</RootNamespace>
+		<Authors>deca</Authors>
+	</PropertyGroup>
+	<!-- Copy CommunityCommands.dll to /dist -->
+	<Target Name="Thunderstore Copy to Dist" AfterTargets="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
+		<Copy SourceFiles="$(OutDir)\CommunityCommands.dll" DestinationFolder="$(ProjectDir)/dist" />
+	</Target>
+	<ItemGroup>
+		<PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be*" IncludeAssets="compile" />
+		<PackageReference Include="BepInEx.Core" Version="6.0.0-be*" IncludeAssets="compile" />
+		<PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+		<PackageReference Include="VRising.Bloodstone" Version="0.1.*" />
+		<PackageReference Include="VRising.Unhollowed.Client" Version="0.6.5.57575090" />
+		<PackageReference Include="VRising.VampireCommandFramework" Version="0.8.*" />
+	</ItemGroup>
 </Project>

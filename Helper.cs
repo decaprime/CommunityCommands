@@ -1,46 +1,24 @@
-﻿using ProjectM;
-using ProjectM.Network;
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using CommunityCommands.Data;
+using ProjectM;
+using ProjectM.Network;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
+using static ProjectM.Roofs.RoofTestSceneBootstrapNew;
 
 namespace CommunityCommands;
 
-internal static class Helper
+// This is an anti-pattern, move stuff away from Helper not into it
+internal static partial class Helper
 {
-	private static World _serverWorld;
-
-	public static World Server
-	{
-		get
-		{
-			if (_serverWorld != null) return _serverWorld;
-
-			_serverWorld = GetWorld("Server")
-				?? throw new System.Exception("There is no Server world (yet). Did you install a server mod on the client?");
-			return _serverWorld;
-		}
-	}
-
-	public static bool IsServer => Application.productName == "VRisingServer";
-
-	private static World GetWorld(string name)
-	{
-		foreach (var world in World.s_AllWorlds)
-		{
-			if (world.Name == name)
-			{
-				return world;
-			}
-		}
-
-		return null;
-	}
 	public static PrefabGUID GetPrefabGUID(Entity entity)
 	{
-		var entityManager = Server.EntityManager;
+		var entityManager = Core.EntityManager;
 		PrefabGUID guid;
 		try
 		{
@@ -53,11 +31,21 @@ internal static class Helper
 		return guid;
 	}
 
+
 	public static Entity AddItemToInventory(Entity recipient, PrefabGUID guid, int amount)
 	{
-		var gameData = Server.GetExistingSystem<GameDataSystem>();
-		var itemSettings = AddItemSettings.Create(Server.EntityManager, gameData.ItemHashLookupMap);
-		var inventoryResponse = InventoryUtilitiesServer.TryAddItem(itemSettings, recipient, guid, amount);
-		return inventoryResponse.NewEntity;
+		try
+		{
+			var gameData = Core.Server.GetExistingSystem<GameDataSystem>();
+			var itemSettings = AddItemSettings.Create(Core.EntityManager, gameData.ItemHashLookupMap);
+			var inventoryResponse = InventoryUtilitiesServer.TryAddItem(itemSettings, recipient, guid, amount);
+
+			return inventoryResponse.NewEntity;
+		}
+		catch (Exception e)
+		{
+			Core.LogException(e);
+		}
+		return new Entity();
 	}
 }
