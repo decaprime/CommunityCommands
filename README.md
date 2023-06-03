@@ -4,3 +4,4 @@ CommunityCommands is a server modification for V Rising that adds chat commands 
 
 ## Commands
 - `.bloodpotion`
+- `.spawnnpc`

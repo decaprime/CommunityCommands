@@ -1,17 +1,15 @@
 ﻿using ProjectM;
-using ProjectM.Network;
-using System;
-using System.Runtime.InteropServices;
-using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
+using Unity.Transforms;
+using Unity.Mathematics;
 
 namespace CommunityCommands;
 
 internal static class Helper
 {
 	private static World _serverWorld;
-
+	private static Entity empty_entity = new Entity();
 	public static World Server
 	{
 		get
@@ -38,6 +36,23 @@ internal static class Helper
 
 		return null;
 	}
+
+	public static bool SpawnAtPosition(Entity user, string name, int count, float2 position, float minRange = 1, float maxRange = 2, float duration = -1)
+	{
+		var isUnitFound = Database.database_units.TryGetValue(name, out var unit);
+		var isBossFound = Database.database_bosses.TryGetValue(name, out var boss);
+
+		if (!isUnitFound && !isBossFound)
+			return false;
+
+		var entityToSpawn = isUnitFound ? unit : boss;
+
+		var translation = Server.EntityManager.GetComponentData<Translation>(user);
+		var f3pos = new float3(position.x, translation.Value.y, position.y);
+		Server.GetExistingSystem<UnitSpawnerUpdateSystem>().SpawnUnit(empty_entity, entityToSpawn, f3pos, count, minRange, maxRange, duration);
+		return true;
+	}
+
 	public static PrefabGUID GetPrefabGUID(Entity entity)
 	{
 		var entityManager = Server.EntityManager;

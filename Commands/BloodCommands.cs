@@ -15,7 +15,8 @@ internal static class BloodCommands
 		Rogue = 793735874,
 		Brute = 581377887,
 		Scholar = -586506765,
-		Worker = -540707191
+		Worker = -540707191,
+		Mutant = -2017994753
 	}
 
 	[Command("bloodpotion", "bp", description: "Creates a Potion with specified Blood Type, Quality and Value", adminOnly: true)]
