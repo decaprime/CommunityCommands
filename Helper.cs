@@ -39,12 +39,17 @@ internal static class Helper
 
 	public static bool SpawnAtPosition(Entity user, string name, int count, float2 position, float minRange = 1, float maxRange = 2, float duration = -1)
 	{
-		var isFound = Database.database_units.TryGetValue(name, out var unit);
-		if (!isFound) return false;
+		var isUnitFound = Database.database_units.TryGetValue(name, out var unit);
+		var isBossFound = Database.database_bosses.TryGetValue(name, out var boss);
+
+		if (!isUnitFound && !isBossFound)
+			return false;
+
+		var entityToSpawn = isUnitFound ? unit : boss;
 
 		var translation = Server.EntityManager.GetComponentData<Translation>(user);
 		var f3pos = new float3(position.x, translation.Value.y, position.y);
-		Server.GetExistingSystem<UnitSpawnerUpdateSystem>().SpawnUnit(empty_entity, unit, f3pos, count, minRange, maxRange, duration);
+		Server.GetExistingSystem<UnitSpawnerUpdateSystem>().SpawnUnit(empty_entity, entityToSpawn, f3pos, count, minRange, maxRange, duration);
 		return true;
 	}
 
