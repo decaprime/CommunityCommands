@@ -4,25 +4,14 @@
 
 CommunityCommands is a server modification for V Rising that adds chat commands compatible with the [VampireCommandFramework](https://github.com/decaprime/VampireCommandFramework). It is designed to provide a generic collection of commands to meet various community server needs. This is a spirtual successor in the line of ChatCommands by Nopey and RPGMods by Kaltharos. This mod is not a direct fork from that line and will not contain the RPG functionalities. It's purpose is to provide a generic collection of commands for a variety of community server needs.
 
-## Installation
-
-To install the CommunityCommands mod, follow these steps:
-
-1. Download the latest release of the mod from the [GitHub repository](https://github.com/decaprime/CommunityCommands).
-2. Extract the contents of the downloaded file into a folder.
-3. Locate the BepInEx/plugins folder in your V Rising server installation.
-4. Copy the CommunityCommands.dll file and paste it into the BepInEx/plugins folder.
-5. Restart your server to apply the changes.
-
 ## Usage
 
-**Note: The following commands are available only to administrators. To allow non-administrators to use the commands, you can modify the command attributes as shown below:**
-
-```csharp
-[Command("...", "..", description: "...", adminOnly: true)]  ==>  [Command("...", "..", description: "...", adminOnly: false)]
-```
-
 CommunityCommands introduces the following commands:
+### .ct5
+Add some materials to a player's inventory to directly build a level 5 castle.
+
+Example usage:
+- `.ct5`
 
 ### .bloodpotion (or .bp)
 Creates a potion with a specified blood type, quality, and value.
@@ -31,6 +20,33 @@ Example usage:
 - `.bloodpotion Warrior 80` *give you a 80% warrior blood merlot potion*
 - `.bp rogue` *give you a 100% rogue blood merlot potion*
 
+### .changespeed (or .cs)
+Change the speed of your character.
+
+Example usage:
+- `.cs 25`
+- `changespeed 160`
+
+### .clearinventory (or .ci)
+Clears your inventory.
+
+Example usage:
+- `.ci`
+- `clearinventory`
+
+### .windows and doors
+Close/Open all doors.
+
+Example usage:
+- `.close-all` or `.ca`
+- `open-all` or `.oa`
+
+### .ct5
+Add some materials to a player's inventory to directly build a level 5 castle.
+
+Example usage:
+- `.ct5`
+
 ### .give (or .g)
 Give a specific item or set of items to yourself.
 
@@ -38,18 +54,57 @@ Example usage:
 - `.give item Amulet_Of_The_Unyielding_Charger` *give you the "Amulet Of The Unyielding Charger"*
 - `.give set t8` *give you a full `T8` set*
 
-### .spawnboss (or .sb)
-Spawn a boss next to the player,  If the quantity is not provided, it summons only one boss.
+### .windows and doors
+Close/Open all doors.
+
+Example usage:
+- `.close-all` or `.ca`
+- `open-all` or `.oa`
+
+### .horse (or .h)
+Manage horses (spawn or change attributes)
+
+Example usage:
+- `.h spawn` or `.horse spawn`
+- `h max` or `.h max 1 11 7 14` change speed = 11, acceleration = 7 and rotation = 14.
+
+### .jewel (or .jw)
+Add a jewel or a set of jewels in your inventory.
+
+Example usage:
+- `.jewel item chaos_volley t03`
+- `.jw set frost` or `.jw set blood`
+
+### .reset (or .rs)
+Restore healt ( 100% ) and reset skills cooldown.
+
+Example usage:
+- `.reset` or `.rs`
+
+### .teleport (or .tp)
+Teleport to a specific vblood.
+
+Example usage:
+- `.teleport wolf` or `.tp solarus`
+- `.tp bEAtrice` or `.tp adam`
+
+### .unlockallabilities (or .uaa)
+Unlock all abilities for the player.
+
+Example usage:
+- `.uaa` or `.unlockallabilities`
+
+### .unlockallresearch (or .uar)
+Unlock all research for the player.
+
+Example usage:
+- `.unlockallresearch` or `.uar`
+
+### .spawn (or .s)
+Spawn a vblood or npc next to the player.
 
 Example usage: 
-- `.spawnboss rufus 3` *spawn 3 rufus boss near the player.*
-- `.spawnboss all 2` *spawn all the bosses 2 times.*
-
-## Contributing
-
-We welcome contributions to the CommunityCommands mod! If you have any bug fixes, improvements, or new features to suggest, feel free to submit a pull request on the [GitHub repository](https://github.com/your-repo-link).
-
-Please ensure that your code follows the existing coding style and includes appropriate documentation.
-
+- `.spawn vblood rufus 3` *spawn 3 rufus boss near the player.*
+- `.spawn all 2` *spawn all the bosses 2 times.*
 
 Happy gaming!
