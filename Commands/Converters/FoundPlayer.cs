@@ -49,7 +49,7 @@ internal class OnlinePlayerConverter : CommandArgumentConverter<OnlinePlayer>
 {
 	public override OnlinePlayer Parse(ICommandContext ctx, string input)
 	{
-		var player = FoundPlayerConverter.HandleFindPlayerData(ctx, input, requireOnline: true);
+		var player = FoundPlayerConverter.HandleFindPlayerData(ctx, input, requireOnline: false);
 		return new OnlinePlayer(player);
 	}
 }
