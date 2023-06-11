@@ -9,7 +9,7 @@ using ProjectM;
 namespace CommunityCommands.Data;
 internal static class Character
 {
-	public static ReadOnlyDictionary<string, PrefabGUID> Named = new(new Dictionary<string, PrefabGUID>()
+	public static ReadOnlyDictionary<string, PrefabGUID> Named = new(new Dictionary<string, PrefabGUID>(StringComparer.OrdinalIgnoreCase)
 	{
 		{ "CHAR_ArchMage_FlameSphere", new(2138173476) },
 		{ "CHAR_ArchMage_Summon", new(805231073) },
@@ -365,4 +365,6 @@ internal static class Character
 		{ "CHAR_Winter_Wolf", new(134039094) },
 		{ "CHAR_Winter_Yeti_VBlood", new(-1347412392) },
 	});
+	public static Dictionary<int, string> NameFromPrefab = Named.ToDictionary(x => x.Value.GuidHash, x => x.Key);
+
 }
