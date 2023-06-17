@@ -9,6 +9,6 @@ CommunityCommands is a server modification for V Rising that adds chat commands 
 - `.give`
 - `.kill`
 - `.rename`
-- `.search items`
-- `.spawn`
+- `.search item`
+- `.spawnnpc`
 - `.customspawn`
