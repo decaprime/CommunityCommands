@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,5 +55,22 @@ public class SearchCommands
 		{
 			Core.LogException(e);
 		}
+	}
+
+
+	[Command("List All Items", "LAI", adminOnly: true)]
+	public static void listAllItems(ChatCommandContext ctx) {
+		var gameDataSystem = Core.Server.GetExistingSystem<GameDataSystem>();
+		var managed = gameDataSystem.ManagedDataRegistry;
+
+		foreach (var entry in gameDataSystem.ItemHashLookupMap) {
+			try {
+				var item = managed.GetOrDefault<ManagedItemData>(entry.Key);
+				ctx.Reply(item.PrefabName);
+				Core.Log.LogInfo("Prefab Name: " + item.PrefabName);
+
+			} catch { }
+		}
+
 	}
 }
