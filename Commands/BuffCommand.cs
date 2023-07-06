@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CommunityCommands.Commands.Converters;
 using ProjectM;
 using ProjectM.Network;
+using ProjectM.Shared;
 using Unity.Entities;
 using VampireCommandFramework;
 
@@ -34,5 +35,23 @@ internal class BuffCommands
 		};
 
 		des.ApplyBuff(fromCharacter, buffEvent);
+	}
+
+	[Command("debuff", adminOnly: true)]
+	public void DebuffCommand(ChatCommandContext ctx, int prefabBuff, OnlinePlayer player = null)
+	{
+
+		if (!player?.Value.IsOnline ?? false)
+		{
+			throw ctx.Error("Player not found or not online.");
+		}
+		var buff = new PrefabGUID(prefabBuff);
+		if (!BuffUtility.TryGetBuff(Core.EntityManager, ctx.Event.SenderCharacterEntity, buff, out var buffData))
+		{
+			throw ctx.Error($"Could not find buff on player to remove.");
+		}
+
+		DestroyUtility.Destroy(Core.EntityManager, buffData, DestroyDebugReason.TryRemoveBuff);
+		ctx.Reply("Removed buff");
 	}
 }
