@@ -1,5 +1,6 @@
 using CommunityCommands.Commands.Converters;
 using Il2CppSystem;
+using Il2CppInterop.Runtime;
 using ProjectM;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -11,9 +12,12 @@ namespace CommunityCommands.Commands;
 internal class ReviveCommands
 {
 	[Command("revive", adminOnly: true)]
-	public void ReviveCommand(ChatCommandContext ctx)
+	public void ReviveCommand(ChatCommandContext ctx, OnlinePlayer target = null)
 	{
-		var pos = Core.EntityManager.GetComponentData<LocalToWorld>(ctx.Event.SenderCharacterEntity).Position;
+		var user = target?.Value.UserEntity ?? ctx.Event.SenderUserEntity;
+		var character = target?.Value.CharEntity ?? ctx.Event.SenderCharacterEntity;
+
+		var pos = Core.EntityManager.GetComponentData<LocalToWorld>(character).Position;
 
 		var sbs = Core.Server.GetExistingSystem<ServerBootstrapSystem>();
 		var bufferSystem = Core.Server.GetExistingSystem<EntityCommandBufferSystem>();
@@ -23,9 +27,9 @@ internal class ReviveCommands
 		spawnLoc.value = pos;
 		spawnLoc.has_value = true;
 
-		sbs.RespawnCharacter(buffer, ctx.Event.SenderUserEntity,
+		sbs.RespawnCharacter(buffer, user,
 			customSpawnLocation: spawnLoc,
-			previousCharacter: ctx.Event.SenderCharacterEntity);
+			previousCharacter: character);
 
 		ctx.Reply("Revived");
 	}
