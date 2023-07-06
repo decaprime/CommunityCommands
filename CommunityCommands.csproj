@@ -8,14 +8,15 @@
 		<LangVersion>latest</LangVersion>
 		<RootNamespace>CommunityCommands</RootNamespace>
 		<Authors>deca</Authors>
+		<BepInExPluginGuid>gg.deca.CommunityCommands</BepInExPluginGuid>
 	</PropertyGroup>
 	<!-- Copy CommunityCommands.dll to /dist -->
 	<Target Name="Thunderstore Copy to Dist" AfterTargets="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
 		<Copy SourceFiles="$(OutDir)\CommunityCommands.dll" DestinationFolder="$(ProjectDir)/dist" />
 	</Target>
 	<ItemGroup>
-		<PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be*" IncludeAssets="compile" />
-		<PackageReference Include="BepInEx.Core" Version="6.0.0-be*" IncludeAssets="compile" />
+		<PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.668" IncludeAssets="compile" />
+		<PackageReference Include="BepInEx.Core" Version="6.0.0-be.668" IncludeAssets="compile" />
 		<PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
 		<PackageReference Include="VRising.Bloodstone" Version="0.1.*" />
 		<PackageReference Include="VRising.Unhollowed.Client" Version="0.6.5.57575090" />
