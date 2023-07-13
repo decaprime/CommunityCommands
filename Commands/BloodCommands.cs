@@ -12,6 +12,10 @@ internal static class BloodCommands
 	[Command("bloodpotion", "bp", description: "Creates a Potion with specified Blood Type, Quality and Value", adminOnly: true)]
 	public static void GiveBloodPotionCommand(ChatCommandContext ctx, BloodType type = BloodType.Frailed, float quality = 100f)
 	{
+		if(!System.Enum.IsDefined(typeof(BloodType), type)){
+			type = BloodType.Frailed;
+		}
+
 		quality = Mathf.Clamp(quality, 0, 100);
 
 		Entity entity = Helper.AddItemToInventory(ctx.Event.SenderCharacterEntity, new PrefabGUID(828432508), 1);
