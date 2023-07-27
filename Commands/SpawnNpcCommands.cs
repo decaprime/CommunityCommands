@@ -18,12 +18,12 @@ internal static class SpawnCommands
 		{
 			if (Character.Named.TryGetValue(input, out var unit) || Character.Named.TryGetValue("CHAR_" + input, out unit))
 			{
-				return new (Character.NameFromPrefab[unit.GuidHash], unit);
+				return new(Character.NameFromPrefab[unit.GuidHash], unit);
 			}
-// "CHAR_Bandit_Bomber": -1128238456,
+			// "CHAR_Bandit_Bomber": -1128238456,
 			if (int.TryParse(input, out var id) && Character.NameFromPrefab.TryGetValue(id, out var name))
 			{
-				return new (name, new(id));
+				return new(name, new(id));
 			}
 
 			throw ctx.Error($"Can't find unit {input.Bold()}");
@@ -40,7 +40,7 @@ internal static class SpawnCommands
 	}
 
 	[Command("customspawn", "cspn", "customspawn <Prefab Name> [<BloodType> <BloodQuality> <Consumable(\"true/false\")> <Duration>]", "Spawns a modified NPC at your current position.", adminOnly: true)]
-	public static void CustomSpawnNpc(ChatCommandContext ctx, CharacterUnit unit, BloodType type, int quality, bool consumable, int duration = -1)
+	public static void CustomSpawnNpc(ChatCommandContext ctx, CharacterUnit unit, int level = 0, BloodType type = BloodType.Frailed, int quality = 0, bool consumable = true, int duration = -1)
 	{
 		var pos = Core.EntityManager.GetComponentData<LocalToWorld>(ctx.Event.SenderCharacterEntity).Position;
 
@@ -55,6 +55,11 @@ internal static class SpawnCommands
 			blood.UnitBloodType = new PrefabGUID((int)type);
 			blood.BloodQuality = quality;
 			blood.CanBeConsumed = consumable;
+
+			var unitLevel = Core.EntityManager.GetComponentData<UnitLevel>(e);
+			unitLevel.Level = level;
+
+			Core.EntityManager.SetComponentData(e, unitLevel);
 			Core.EntityManager.SetComponentData(e, blood);
 		});
 	}
