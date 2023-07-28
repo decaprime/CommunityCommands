@@ -39,8 +39,8 @@ internal static class SpawnCommands
 		ctx.Reply($"Spawning {character.Name.Bold()} at your position");
 	}
 
-	[Command("customspawn", "cspn", "customspawn <Prefab Name> [<BloodType> <BloodQuality> <Consumable(\"true/false\")> <Duration>]", "Spawns a modified NPC at your current position.", adminOnly: true)]
-	public static void CustomSpawnNpc(ChatCommandContext ctx, CharacterUnit unit, int level = 0, BloodType type = BloodType.Frailed, int quality = 0, bool consumable = true, int duration = -1)
+	[Command("customspawn", "cspn", "customspawn <Prefab Name> [<BloodType> <BloodQuality> <Consumable(\"true/false\")> <Duration> <level>]", "Spawns a modified NPC at your current position.", adminOnly: true)]
+	public static void CustomSpawnNpc(ChatCommandContext ctx, CharacterUnit unit, BloodType type = BloodType.Frailed, int quality = 0, bool consumable = true, int duration = -1, int level = 0)
 	{
 		var pos = Core.EntityManager.GetComponentData<LocalToWorld>(ctx.Event.SenderCharacterEntity).Position;
 
